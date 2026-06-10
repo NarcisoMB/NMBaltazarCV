@@ -88,7 +88,7 @@ function changeToEn() {
     contactP.innerText = "CONTACT";
     downloadCV.innerText = "Download my Curriculum Vitae"
     hereP.innerText = "here"
-    hereP.setAttribute('href', 'https://firebasestorage.googleapis.com/v0/b/nmbaltazarcv.appspot.com/o/Curriculum%20v3%20English.pdf?alt=media&token=15ec066f-7113-4084-a4cb-e33553b70c65');
+    hereP.setAttribute('href', 'https://github.com/NarcisoMB/NMBaltazarCV/blob/main/docs/Narciso_Meza_Baltazar_CV_EN.pdf');
 }
 
 function changeToEs() {
@@ -135,7 +135,7 @@ function changeToEs() {
     contactP.innerText = "CONTACTO";
     downloadCV.innerText = "Descarga mi Curriculum Vitae"
     hereP.innerText = "aqui"
-    hereP.setAttribute('href', 'https://firebasestorage.googleapis.com/v0/b/nmbaltazarcv.appspot.com/o/Curriculum%20v3%20Espan%CC%83ol.pdf?alt=media&token=2c647044-fbdc-49d1-ad45-498c0d53e40e');
+    hereP.setAttribute('href', 'https://github.com/NarcisoMB/NMBaltazarCV/blob/main/docs/Curriculum%20v8%20Espa%C3%B1ol.pdf');
 }
 
 var modal = document.getElementById("myModal");
