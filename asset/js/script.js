@@ -44,6 +44,53 @@ var contactP = document.getElementById('contactP');
 var downloadCV = document.getElementById('downloadCV');
 var hereP = document.getElementById('hereP');
 
+function openDoc(url) {
+    var PDFJS_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    var PDFJS_WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    var rawUrl = url.replace('https://github.com/', 'https://raw.githubusercontent.com/').replace('/raw/', '/');
+    var isPng = rawUrl.endsWith('.png');
+    var mimeType = isPng ? 'image/png' : 'application/pdf';
+    var filename = decodeURIComponent(rawUrl.split('/').pop().replace(/\.[^.]+$/, ''));
+    var title = filename + ' - Narciso Meza Baltazar';
+    var docFilename = title + (isPng ? '.png' : '.pdf');
+    var win = window.open('about:blank', '_blank');
+
+    fetch(rawUrl)
+        .then(function(r) { return r.arrayBuffer(); })
+        .then(function(buffer) {
+            var blobUrl = URL.createObjectURL(new Blob([buffer], { type: mimeType }));
+            var css = [
+                '*{box-sizing:border-box}',
+                'body{margin:0;background:#404040;display:flex;flex-direction:column;height:100vh;font-family:sans-serif;overflow:hidden}',
+                '#tb{background:#333;color:#fff;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}',
+                '#tb-title{font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+                '#tb-dl{background:#1a73e8;color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:13px;white-space:nowrap}',
+                '#view{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px}',
+                'canvas,img{box-shadow:0 2px 8px rgba(0,0,0,.5);max-width:100%}'
+            ].join('');
+            var toolbar = '<div id="tb"><span id="tb-title">' + title + '</span><a id="tb-dl" href="' + blobUrl + '" download="' + docFilename + '">&#8595; Descargar</a></div>';
+            var body = isPng
+                ? '<div id="view"><img src="' + blobUrl + '" alt="' + filename + '"></div>'
+                : '<div id="view"></div>' +
+                  '<script src="' + PDFJS_CDN + '"><\/script>' +
+                  '<script>' +
+                  'pdfjsLib.GlobalWorkerOptions.workerSrc="' + PDFJS_WORKER + '";' +
+                  'pdfjsLib.getDocument("' + blobUrl + '").promise.then(function(d){' +
+                  'var v=document.getElementById("view");' +
+                  'for(var i=1;i<=d.numPages;i++){var c=document.createElement("canvas");c.id="p"+i;v.appendChild(c);}' +
+                  'for(var i=1;i<=d.numPages;i++){(function(p){d.getPage(p).then(function(pg){' +
+                  'var vp=pg.getViewport({scale:1.5});var c=document.getElementById("p"+p);' +
+                  'c.width=vp.width;c.height=vp.height;pg.render({canvasContext:c.getContext("2d"),viewport:vp});' +
+                  '})})(i);}});' +
+                  '<\/script>';
+
+            win.document.open();
+            win.document.write('<!DOCTYPE html><html style="height:100%"><head><meta charset="utf-8"><title>' + title + '</title><style>' + css + '</style></head><body>' + toolbar + body + '</body></html>');
+            win.document.close();
+        })
+        .catch(function() { win.location.href = rawUrl; });
+}
+
 function changeToEn() {
     quickAccess.innerText = "Quick Access";
     language.innerText = "Language";
@@ -88,7 +135,8 @@ function changeToEn() {
     contactP.innerText = "CONTACT";
     downloadCV.innerText = "Download my Curriculum Vitae"
     hereP.innerText = "here"
-    hereP.setAttribute('href', 'https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Narciso_Meza_Baltazar_CV_EN.pdf');
+    hereP.href = 'javascript:void(0)';
+    hereP.onclick = function() { openDoc('https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Narciso_Meza_Baltazar_CV_EN.pdf'); };
 }
 
 function changeToEs() {
@@ -135,7 +183,8 @@ function changeToEs() {
     contactP.innerText = "CONTACTO";
     downloadCV.innerText = "Descarga mi Curriculum Vitae"
     hereP.innerText = "aqui"
-    hereP.setAttribute('href', 'https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Curriculum%20v8%20Espa%C3%B1ol.pdf');
+    hereP.href = 'javascript:void(0)';
+    hereP.onclick = function() { openDoc('https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Curriculum%20v8%20Espa%C3%B1ol.pdf'); };
 }
 
 var modal = document.getElementById("myModal");
