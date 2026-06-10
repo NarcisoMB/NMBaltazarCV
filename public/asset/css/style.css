@@ -1,0 +1,197 @@
+a:link {
+    color: #a4dcfb;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #a4dcfb;
+    text-decoration: none;
+}
+
+a:hover {
+    color: aliceblue;
+    text-decoration: underline;
+}
+
+body {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+div.cardColor {
+    background-color: #808080;
+    opacity: 0.9;
+}
+
+@media screen and (max-width: 1200px) {
+    div.col-s-1-android {
+        padding: 5%;
+    }
+    div.col-s-1-iphone {
+        padding: 5%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    div.col-s-1-android {
+        padding-left: 100%;
+    }
+    div.col-s-1-iphone {
+        padding-left: 50%;
+    }
+}
+
+div.width90 {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+#fotoPerfil{
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    width: 10%;
+}
+
+#fotoPerfil:hover{
+    opacity: 0.7;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 11;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,1);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}  
+
+hr.solid {
+    border-top: 3px solid #f5f5f5;
+}
+
+iframe.description {
+    display: none;
+    height: 400px;
+    width: 400px;
+}
+
+iframe.tiptext {
+    cursor: pointer;
+}
+
+p {
+    text-align: center;
+}
+
+p.width90 {
+    margin-left: 5%;
+    width: 90%;
+}
+
+
+
+
+/* Style the tab */
+.tab {
+    float: left;
+    /* border: 1px solid #ccc; */
+    background-color: #f1f1f1;
+    width: 25%;
+    /* height: 300px; */
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current "tab button" class */
+  .tab button.active {
+    background-color: #ccc;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    background-color: #808080;
+    width: 70%;
+    border-left: none;
+    /* height: 300px; */
+    display: none;
+  }
