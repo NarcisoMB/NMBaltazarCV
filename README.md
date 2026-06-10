@@ -15,7 +15,6 @@ Desarrollador iOS Jr con más de 4 años de experiencia desarrollando aplicacion
 - HTML + Bootstrap 5
 - JavaScript / jQuery
 - Soporte i18n Español / English
-- Firebase Hosting (GCP)
 
 ## Demo
 
