@@ -1,15 +1,3 @@
-var quickAccess = document.getElementById('quickAccess');
-var language = document.getElementById('language');
-var quickAccess = document.getElementById('quickAccess');
-var language = document.getElementById('language');
-var profEdu = document.getElementById('profEdu');
-var diplomat = document.getElementById('diplomat');
-var certifications = document.getElementById('certifications');
-var languages = document.getElementById('languages');
-var abilities = document.getElementById('abilities');
-var progLang = document.getElementById('progLang');
-var jobExp = document.getElementById('jobExp');
-var contact = document.getElementById('contact');
 var profileP = document.getElementById('profileP');
 var profileCardP = document.getElementById('profileCardP');
 var profEduP = document.getElementById('profEduP');
@@ -43,6 +31,122 @@ var kapitalCardP3 = document.getElementById('kapitalCardP3');
 var contactP = document.getElementById('contactP');
 var downloadCV = document.getElementById('downloadCV');
 var hereP = document.getElementById('hereP');
+
+// Carousel dots sync
+(function() {
+    function initCarousel(rowId, dotsId) {
+        var row = document.getElementById(rowId);
+        var dots = document.querySelectorAll('#' + dotsId + ' .carousel-dot');
+        if (!row || !dots.length) return;
+
+        row.addEventListener('scroll', function() {
+            var idx = Math.round(row.scrollLeft / row.offsetWidth);
+            dots.forEach(function(d, i) {
+                d.classList.toggle('active', i === idx);
+            });
+        }, { passive: true });
+
+        dots.forEach(function(dot, i) {
+            dot.addEventListener('click', function() {
+                row.scrollTo({ left: i * row.offsetWidth, behavior: 'smooth' });
+            });
+        });
+    }
+
+    function initAll() {
+        initCarousel('perfilCarousel', 'perfilDots');
+        initCarousel('eduProf',        'eduDots');
+        initCarousel('expLab',         'expDots');
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+        initAll();
+    }
+})();
+
+// Phone sticky: ocultar cuando el footer es visible
+(function() {
+    function initPhoneObserver() {
+        var phone  = document.getElementById('phoneSticky');
+        var footer = document.getElementById('cont');
+        if (!phone || !footer || !('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                phone.classList.toggle('hidden', entry.isIntersecting);
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(footer);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPhoneObserver);
+    } else {
+        initPhoneObserver();
+    }
+})();
+
+// Footer placement: sección 3 en web, sección 4 propia en móvil
+(function() {
+    var MOBILE_BP = 768;
+
+    function placeFooter() {
+        var footer      = document.getElementById('cont');
+        var snapContainer = document.querySelector('.snap-container');
+        var secExp      = document.getElementById('sec-exp');
+        var secFooter   = document.getElementById('sec-footer');
+        var expInner    = secExp ? secExp.querySelector('.snap-inner--col') : null;
+
+        if (!footer || !snapContainer || !expInner) return;
+
+        var isMobile = window.innerWidth <= MOBILE_BP;
+
+        if (isMobile) {
+            // Crear sec-footer si no existe
+            if (!secFooter) {
+                secFooter = document.createElement('section');
+                secFooter.className = 'snap-section snap-section--footer';
+                secFooter.id = 'sec-footer';
+                snapContainer.appendChild(secFooter);
+            }
+            if (footer.parentElement !== secFooter) {
+                secFooter.appendChild(footer);
+            }
+        } else {
+            // Devolver footer a sección 3
+            if (footer.parentElement !== expInner) {
+                expInner.appendChild(footer);
+            }
+            // Eliminar sec-footer vacío
+            if (secFooter) {
+                secFooter.remove();
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', placeFooter);
+    window.addEventListener('resize', placeFooter);
+})();
+
+var currentLang = 'es';
+
+function toggleLang() {
+    if (currentLang === 'es') {
+        changeToEn();
+    } else {
+        changeToEs();
+    }
+}
+
+function snapTo(sectionId) {
+    var el = document.getElementById(sectionId);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+    }
+}
 
 function openDoc(url) {
     var PDFJS_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
@@ -92,32 +196,24 @@ function openDoc(url) {
 }
 
 function changeToEn() {
-    quickAccess.innerText = "Quick Access";
-    language.innerText = "Language";
-    profEdu.innerText = "Profesional Education";
-    diplomat.innerText = "Diplomats";
-    certifications.innerText = "Certifications";
-    languages.innerText = "Languages";
-    abilities.innerText = "Abilities";
-    progLang.innerText = "Programing Languages";
-    jobExp.innerText = "Job Experience";
-    contact.innerText = "Contact";
-    profileP.innerText = "PROFILE";
+    currentLang = 'en';
+    document.getElementById('langBtn').innerText = 'ES';
+    profileP.innerText = "Profile";
     profileCardP.innerText = "In August 2016 I started my Bachelor's Degree in Software Engineering and Computer Systems at DeLaSalle Bajío University, in the city of León, Gto., which I finished in June 2020; in December of the same year, I took the CENEVAL exam, in which I obtained a Satisfactory result. I am currently waiting for my Professional Degree, due to the procedures involved in this process. In February 2021, I started a Diploma in Design and Programming of Apps taught by the Universidad Anáhuac, which I finished in October 2021. I also took a Certification in Mobile Application Development from Google. I have an advanced command of English, and basic command of French. The latter I studied in an intensive one-month course in the city of Montreal, Canada, in June 2019.";
-    profEduP.innerText = "PROFESIONAL EDUCATION";
+    profEduP.innerText = "University education";
     profEduCardP.innerText = "Universidad De LaSalle Bajío, León, Guanajuato Software Engineering and Computer Systems 2016-2020";
     consStudies.innerText = "Proof of University Education";
     consDegree.innerText = "Certificate of Completion";
-    diplomatP.innerText = "DIPLOMA";
+    diplomatP.innerText = "Diploma";
     diplomatCardP.innerText = "Universidad Anáhuac Apps Design and Programming 2021-2021";
-    certificationsP.innerText = "CERTIFICATIONS";
-    languagesP.innerText = "LANGUAGES";
+    certificationsP.innerText = "Certifications";
+    languagesP.innerText = "Languages";
     esP.innerText = "Spanish - Native Language";
     enP.innerText = "English - Advanced";
     frP.innerText = "French - Basic";
-    progLangP.innerText = "PROGRAMING LANGUAGES";
-    abilitiesP.innerText = "ABILITIES";
-    jobExpP.innerText = "JOB EXPERIENCE";
+    progLangP.innerText = "Programming languages";
+    abilitiesP.innerText = "Abilities";
+    jobExpP.innerText = "Job experience";
     jobExpCardP1.innerText = "1 year as Developer Jr Swift, developing Mobile Apps with SwiftUI at";
     jobExpCardP2.innerText = "• The first development was for a private company, which developed a solution for the control and management of appointments in which the people who were going to an appointment register the items with which they were going to arrive, such as computer equipment, tools, etc.";
     jobExpCardP3.innerText = "• In the second development was for Forte, the development was the mobile application for a marketplace that already had a website, and sought to reach the mobile audience.";
@@ -132,7 +228,7 @@ function changeToEn() {
     kapitalCardP1.innerText = "2 years, 5 months and counting as Jr Developer, developing Mobile Banking using Swift at ";
     kapitalCardP2.innerText = "• First project: Git in GitLab for version control, Jira and ClickUp for AGILE methodology, API connections, CocoaPods, UIKit framework in Swift 5.9.2, latest XCode, VIPER design pattern.";
     kapitalCardP3.innerText = "• Second project: iOS mobile banking app using SwiftUI and Clean Architecture, organized in independent domain modules (presentation, domain and data). Built and evolved an internal design system distributed as Swift Package with reusable components and design tokens (color, typography, spacing, radii). Real-time communication via WebSockets for currency exchange rates. RSA-encrypted REST service integration through a centralized network layer. Progressive screen migration to align with the web version (React + Tailwind CSS). NavigationStack with centralized routing, dependency injection via factories, and reactive patterns with Combine and @StateObject / @ObservableObject, leveraging AI-assisted development tools.";
-    contactP.innerText = "CONTACT";
+    contactP.innerText = "Contact";
     downloadCV.innerText = "Download my Curriculum Vitae"
     hereP.innerText = "here"
     hereP.href = 'javascript:void(0)';
@@ -140,32 +236,24 @@ function changeToEn() {
 }
 
 function changeToEs() {
-    quickAccess.innerText = "Acceso Rapido";
-    language.innerText = "Idioma"
-    profEdu.innerText = "Educación Profesional";
-    diplomat.innerText = "Diplomados";
-    certifications.innerText = "Certificaciones";
-    languages.innerText = "Idiomas";
-    abilities.innerText = "Habilidades";
-    progLang.innerText = "Lenguajes de Programación";
-    jobExp.innerText = "Experiencia Laboral";
-    contact.innerText = "Contacto";
-    profileP.innerText = "PERFIL";
+    currentLang = 'es';
+    document.getElementById('langBtn').innerText = 'EN';
+    profileP.innerText = "Perfil";
     profileCardP.innerText = "En el mes de agosto de 2016 inicié la Licenciatura en Ingeniería de Software y Sistemas Computacionales en la Universidad DeLaSalle Bajío, en la ciudad de León, Gto., misma que finalicé en junio de 2020; en diciembre del mismo año, presenté el examen CENEVAL, en el cual obtuve un resultado Satisfactorio. Actualmente estoy en espera de mi Título Profesional, por los trámites que este proceso conlleva. En febrero del 2021, inicié un Diplomado en Diseño y Programación de Apps impartido por la Universidad Anáhuac, el cual finalicé en octubre del 2021. Además, tomé una Certificación en Desarrollo de Aplicaciones Móviles de Google. Tengo un dominio avanzado del inglés, y básico del francés. Este último lo estudié en un curso intensivo de un mes en la ciudad de Montreal, Canadá, en junio de 2019.";
-    profEduP.innerText = "EDUCACIÓN PROFESIONAL";
+    profEduP.innerText = "Educación universitaria";
     profEduCardP.innerText = "Universidad De LaSalle Bajío, León, Guanajuato Ingeniería De Software Y Sistemas Computacionales 2016-2020";
     consStudies.innerText = "Constancia Estudios Universitarios";
     consDegree.innerText = "Constancia de Titulación";
-    diplomatP.innerText = "DIPLOMADO";
+    diplomatP.innerText = "Diplomado";
     diplomatCardP.innerText = "Universidad Anáhuac Diseño y Programación de Apps 2021-2021";
-    certificationsP.innerText = "CERTIFICACIONES";
-    languagesP.innerText = "IDIOMAS";
+    certificationsP.innerText = "Certificaciones";
+    languagesP.innerText = "Idiomas";
     esP.innerText = "Español - Lengua Materna";
     enP.innerText = "Inglés - Avanzado";
     frP.innerText = "Francés - Basico";
-    progLangP.innerText = "LENGUAJES DE PROGRAMACIÓN";
-    abilitiesP.innerText = "HABILIDADES";
-    jobExpP.innerText = "EXPERIENCIA LABORAL";
+    progLangP.innerText = "Lenguajes de programación";
+    abilitiesP.innerText = "Habilidades";
+    jobExpP.innerText = "Experiencia laboral";
     jobExpCardP1.innerText = "1 año como Desarrollador Jr Swift, desarrollando Aplicaciones Móviles con SwiftUI en";
     jobExpCardP2.innerText = "• En el primer desarrollo fue para una empresa privada, a la cual se le desarrollo una solución para el control y gestión de citas en la cual las personas que iban a alguna cita registran los artículos con los que iban a llegar, llámese equipos de computo, herramientas, etc.";
     jobExpCardP3.innerText = "• En el segundo desarrollo fue para Forte, el desarrollo fue la aplicación móvil para un marketplace que ya contaba con página web, y buscaba llegar al publico movil.";
