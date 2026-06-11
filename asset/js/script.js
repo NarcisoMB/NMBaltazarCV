@@ -74,6 +74,85 @@ var forteFrontDesc = document.getElementById('forteFrontDesc');
     }
 })();
 
+// Scroll-snap JS: umbral de delta para navegar entre secciones
+(function() {
+    var THRESHOLD = 80;
+    var COOLDOWN  = 750;
+    var accumulated = 0;
+    var lastChange  = 0;
+    var resetTimer  = null;
+
+    function getSectionIds() {
+        var ids = ['sec-perfil', 'sec-edu', 'sec-exp'];
+        if (document.getElementById('sec-footer')) ids.push('sec-footer');
+        return ids;
+    }
+
+    function getCurrentIdx(container) {
+        var ids = getSectionIds();
+        var scrollTop = container.scrollTop;
+        var best = 0, bestDist = Infinity;
+        ids.forEach(function(id, i) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var dist = Math.abs(el.offsetTop - scrollTop);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        return best;
+    }
+
+    function goTo(container, idx) {
+        var ids = getSectionIds();
+        idx = Math.max(0, Math.min(idx, ids.length - 1));
+        var el = document.getElementById(ids[idx]);
+        if (!el) return;
+        lastChange = Date.now();
+        container.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+    }
+
+    function onWheel(e, container) {
+        e.preventDefault();
+        var now = Date.now();
+        if (now - lastChange < COOLDOWN) return;
+
+        accumulated += e.deltaY;
+
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function() { accumulated = 0; }, 200);
+
+        if (Math.abs(accumulated) >= THRESHOLD) {
+            var dir = accumulated > 0 ? 1 : -1;
+            accumulated = 0;
+            goTo(container, getCurrentIdx(container) + dir);
+        }
+    }
+
+    var touchStartY = 0, touchStartX = 0;
+
+    function onTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+    }
+
+    function onTouchEnd(e, container) {
+        var now = Date.now();
+        if (now - lastChange < COOLDOWN) return;
+        var dy = touchStartY - e.changedTouches[0].clientY;
+        var dx = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(dy) > Math.abs(dx) * 1.5 && Math.abs(dy) > 60) {
+            goTo(container, getCurrentIdx(container) + (dy > 0 ? 1 : -1));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var container = document.querySelector('.snap-container');
+        if (!container) return;
+        container.addEventListener('wheel', function(e) { onWheel(e, container); }, { passive: false });
+        container.addEventListener('touchstart', onTouchStart, { passive: true });
+        container.addEventListener('touchend', function(e) { onTouchEnd(e, container); }, { passive: true });
+    });
+})();
+
 // Phone sticky: ocultar cuando el footer es visible
 (function() {
     function initPhoneObserver() {

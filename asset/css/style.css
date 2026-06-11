@@ -337,7 +337,6 @@ html {
 .snap-container {
     height: 100vh;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
 
@@ -829,10 +828,6 @@ html {
 /* ── Responsive: móvil ── */
 @media screen and (max-width: 768px) {
 
-    /* Snap suave en móvil */
-    .snap-container {
-        scroll-snap-type: y proximity;
-    }
 
     /* Secciones: altura libre en móvil para no cortar contenido apilado */
     .snap-section {
