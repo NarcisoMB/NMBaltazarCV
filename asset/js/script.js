@@ -31,6 +31,14 @@ var kapitalCardP3 = document.getElementById('kapitalCardP3');
 var contactP = document.getElementById('contactP');
 var downloadCV = document.getElementById('downloadCV');
 var hereP = document.getElementById('hereP');
+var profPrepP = document.getElementById('profPrepP');
+var seccionesP = document.getElementById('seccionesP');
+var navPerfil = document.getElementById('navPerfil');
+var navEdu = document.getElementById('navEdu');
+var navExp = document.getElementById('navExp');
+var kapitalFrontDesc = document.getElementById('kapitalFrontDesc');
+var imasdFrontDesc = document.getElementById('imasdFrontDesc');
+var forteFrontDesc = document.getElementById('forteFrontDesc');
 
 // Carousel dots sync
 (function() {
@@ -233,6 +241,14 @@ function changeToEn() {
     hereP.innerText = "here"
     hereP.href = 'javascript:void(0)';
     hereP.onclick = function() { openDoc('https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Narciso_Meza_Baltazar_CV_EN.pdf'); };
+    profPrepP.innerText = "Professional Training";
+    seccionesP.innerText = "Sections";
+    navPerfil.innerText = "Profile & Skills";
+    navEdu.innerText = "Education & Certifications";
+    navExp.innerText = "Work Experience";
+    kapitalFrontDesc.innerText = "iOS Jr Developer at Intercam Banco, now Kapital México. Two projects: legacy app in UIKit with VIPER pattern and Agile methodology; and new banking app in SwiftUI with Clean Architecture, design system distributed as Swift Package, real-time exchange rates via WebSockets and RSA-encrypted REST integration.";
+    imasdFrontDesc.innerText = "Jr Developer at ImasD across four projects: banking services app with dynamic forms and Backend/ReactJS support; telemedicine app with video calls and payment plans; web portal for Access Point network with geo-fences; and public transport app with integrated payments.";
+    forteFrontDesc.innerText = "First job as Jr Swift Developer at Forte Innovation. Two apps with SwiftUI and MVVM pattern: appointment management system for a private company and mobile version of an existing web marketplace.";
 }
 
 function changeToEs() {
@@ -273,6 +289,14 @@ function changeToEs() {
     hereP.innerText = "aqui"
     hereP.href = 'javascript:void(0)';
     hereP.onclick = function() { openDoc('https://github.com/NarcisoMB/NMBaltazarCV/raw/main/docs/Curriculum%20v8%20Espa%C3%B1ol.pdf'); };
+    profPrepP.innerText = "Preparación profesional";
+    seccionesP.innerText = "Secciones";
+    navPerfil.innerText = "Perfil & Skills";
+    navEdu.innerText = "Educación & Certificaciones";
+    navExp.innerText = "Experiencia laboral";
+    kapitalFrontDesc.innerText = "Desarrollador iOS Jr en Intercam Banco, hoy Kapital México. Dos proyectos: app legacy en UIKit con patrón VIPER y metodología Ágil; y nueva app bancaria en SwiftUI con Clean Architecture, sistema de diseño distribuido como Swift Package, tasas de cambio en tiempo real vía WebSockets e integración REST cifrada con RSA.";
+    imasdFrontDesc.innerText = "Desarrollador Jr en ImasD en cuatro proyectos: app de servicios bancarios con formularios dinámicos y apoyo en Backend/ReactJS; app de telemedicina con videollamadas y planes de pago; portal web para red de Access Points con geo-cercas; y app de transporte público con pagos integrados.";
+    forteFrontDesc.innerText = "Primer empleo como Desarrollador Jr Swift en Forte Innovation. Dos apps con SwiftUI y patrón MVVM: sistema de gestión de citas para empresa privada y versión móvil de un marketplace existente en web.";
 }
 
 var modal = document.getElementById("myModal");

@@ -130,7 +130,7 @@
         <section class="snap-section" id="sec-edu">
             <div class="snap-inner snap-inner--col">
                 <div class="exp-section-header">
-                    <p class="exp-section-title">Preparación profesional</p>
+                    <p class="exp-section-title" id="profPrepP">Preparación profesional</p>
                     <hr class="solid">
                 </div>
                 <div class="job-cards-row" id="eduProf" style="margin:0; width:100%;">
@@ -235,7 +235,7 @@
                                         <span class="job-tag">CocoaPods</span>
                                         <span class="job-tag">GitLab</span>
                                     </div>
-                                    <p class="job-front-desc">Desarrollador iOS Jr en Intercam Banco, hoy Kapital México. Dos proyectos: app legacy en UIKit con patrón VIPER y metodología Ágil; y nueva app bancaria en SwiftUI con Clean Architecture, sistema de diseño distribuido como Swift Package, tasas de cambio en tiempo real vía WebSockets e integración REST cifrada con RSA.</p>
+                                    <p id="kapitalFrontDesc" class="job-front-desc">Desarrollador iOS Jr en Intercam Banco, hoy Kapital México. Dos proyectos: app legacy en UIKit con patrón VIPER y metodología Ágil; y nueva app bancaria en SwiftUI con Clean Architecture, sistema de diseño distribuido como Swift Package, tasas de cambio en tiempo real vía WebSockets e integración REST cifrada con RSA.</p>
                                 </div>
                             </div>
                             <!-- BACK -->
@@ -281,7 +281,7 @@
                                         <span class="job-tag">Azure Git</span>
                                         <span class="job-tag">CocoaPods</span>
                                     </div>
-                                    <p class="job-front-desc">Desarrollador Jr en ImasD en cuatro proyectos: app de servicios bancarios con formularios dinámicos y apoyo en Backend/ReactJS; app de telemedicina con videollamadas y planes de pago; portal web para red de Access Points con geo-cercas; y app de transporte público con pagos integrados.</p>
+                                    <p id="imasdFrontDesc" class="job-front-desc">Desarrollador Jr en ImasD en cuatro proyectos: app de servicios bancarios con formularios dinámicos y apoyo en Backend/ReactJS; app de telemedicina con videollamadas y planes de pago; portal web para red de Access Points con geo-cercas; y app de transporte público con pagos integrados.</p>
                                 </div>
                             </div>
                             <!-- BACK -->
@@ -328,7 +328,7 @@
                                         <span class="job-tag">REST APIs</span>
                                         <span class="job-tag">Git</span>
                                     </div>
-                                    <p class="job-front-desc">Primer empleo como Desarrollador Jr Swift en Forte Innovation. Dos apps con SwiftUI y patrón MVVM: sistema de gestión de citas para empresa privada y versión móvil de un marketplace existente en web.</p>
+                                    <p id="forteFrontDesc" class="job-front-desc">Primer empleo como Desarrollador Jr Swift en Forte Innovation. Dos apps con SwiftUI y patrón MVVM: sistema de gestión de citas para empresa privada y versión móvil de un marketplace existente en web.</p>
                                 </div>
                             </div>
                             <!-- BACK -->
@@ -414,11 +414,11 @@
 
                     <!-- Col 3: Secciones -->
                     <div class="footer-col">
-                        <p class="footer-heading">Secciones</p>
+                        <p class="footer-heading" id="seccionesP">Secciones</p>
                         <ul class="footer-list">
-                            <li><a href="#sec-perfil" onclick="snapTo('sec-perfil')">Perfil &amp; Skills</a></li>
-                            <li><a href="#sec-edu" onclick="snapTo('sec-edu')">Educación &amp; Certificaciones</a></li>
-                            <li><a href="#sec-exp" onclick="snapTo('sec-exp')">Experiencia laboral</a></li>
+                            <li><a href="#sec-perfil" id="navPerfil" onclick="snapTo('sec-perfil')">Perfil &amp; Skills</a></li>
+                            <li><a href="#sec-edu" id="navEdu" onclick="snapTo('sec-edu')">Educación &amp; Certificaciones</a></li>
+                            <li><a href="#sec-exp" id="navExp" onclick="snapTo('sec-exp')">Experiencia laboral</a></li>
                         </ul>
                     </div>
                 </footer>
