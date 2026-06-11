@@ -361,10 +361,12 @@ html {
 
 /* Sección 4: footer (creada por JS en móvil) */
 .snap-section--footer {
-    height: auto;
-    min-height: unset;
+    height: 100vh;
+    min-height: 100vh;
     padding: 0;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
